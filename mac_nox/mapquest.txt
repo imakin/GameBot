@@ -1,0 +1,1 @@
+{"start": {"0": "start:0", "1": "start:1", "2": "start:2"}, "start:0": [448, 159], "start:1": [309, 257], "start:2": [586, 257], "map_current_pos": "start:0"}
