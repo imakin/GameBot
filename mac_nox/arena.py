@@ -2,6 +2,7 @@ import time
 import random
 import json
 import sys
+from threading import Thread
 
 import pyautogui
 
@@ -10,6 +11,30 @@ import setting
 import bot
 from setting import cx,cy
 
+
+flag_should_fight = False
+flag_is_fighting = False
+def fightingfight(threadname):
+    while True:
+        while flag_should_fight:
+            for x in range(0, 30):
+                bot.click(747, 486, 5)
+                if (x%10==0):
+                    bot.moveTo(670,480)
+                    time.sleep(0.05)
+                    bot.dragTo(840,486,0.05)
+                    time.sleep(0.05)
+                if (x%4==0):
+                    bot.click(180, 602, 10)
+        while not(flag_should_fight):
+            time.sleep(1)
+            global flag_is_fighting
+            flag_is_fighting = False
+
+thread_fighting = Thread(target=fightingfight, args=(0,))
+thread_fighting.daemon = True
+thread_fighting.start()
+# thread_fighting.join()
 
 def save_map(obj ):
     with open('mapquest.txt', 'w') as f:
@@ -44,22 +69,20 @@ class McocQuest(object):
         self.solution_unsolved = {}
     
     def mcoc_quest(self):
+        global flag_should_fight
+        global flag_is_fighting
         room = self.room_check
         while True:
             img = room.get_grab(region=(445*2,87*2,470*2,109*2))
             
             while room.quest_isin_fight_focus(img):
                 printlog("fight")
-                # ~ self.last_fight_scrot = img
-                for x in range(0, 30):
-                    bot.click(747, 486, 5)
-                    if (x%10==0):
-                        bot.moveTo(670,480)
-                        time.sleep(0.05)
-                        bot.dragTo(840,486,0.05)
-                        time.sleep(0.05)
-                    if (x%4==0):
-                        bot.click(180, 602, 10)
+                if not(flag_is_fighting):
+                    flag_should_fight = True
+                    flag_is_fighting = True
+                    print("ordering to fight")
+
+
                 img = room.get_grab(region=(445*2,87*2,470*2,109*2))
                 # ~ printlog(time.time()-room.last_room_time)
                 if (time.time()-room.last_room_time>300):
@@ -81,8 +104,12 @@ class McocQuest(object):
                     pyautogui.hotkey('ctrl','option','command','1')
                     room.last_room_time = time.time()
                     img = room.get_grab()
+                    flag_should_fight = False
+                    flag_is_fighting = False
                     break
                     
+            flag_should_fight = False
+            flag_is_fighting = False
             
             img = room.get_grab()
 
@@ -240,6 +267,13 @@ class McocQuest(object):
                 
             elif room.arena_champselect(img):
                 printlog("arena champ select")
+
+                bot.click(576,430) #KO
+                time.sleep(0.5)
+                bot.click(576,540) #victory
+                time.sleep(0.5)
+                bot.click(792,630)
+                time.sleep(2)
                 # ~ if room.arena_champselect_multiplier1():                    
                 # ~ printlog("manual belum x3")
                 # ~ x = input()
@@ -275,7 +309,7 @@ class McocQuest(object):
                 while room.arena_champselect(img) and room.arena_champselect_champempty(img) and (time.time()-start)<30:
                     bot.moveTo(363,357)
                     bot.dragTo(207,344)
-                    time.sleep(1)
+                    time.sleep(2)
                     img = room.get_grab()
                 start = time.time()
                 while room.arena_champselect(img) and not(room.arena_champselect_champempty(img)) and (time.time()-start)<30:

@@ -1171,90 +1171,77 @@ class RoomCheck(object):
         
     def arena_champselect(self, image_grab=None):
         """
-        check is in room: 
-        @return tuple (x,y) of find match button may 2019
+        check is in room: arena -> edit team
+        @return tuple (x,y) of find match button
         @return False if no
         """
-        # captured from 55,583 to 64,604
-        xcode0,ycode0,xcode1,ycode1 = 55,583,55,583
+        # captured from 100,602 to 122,615
+        xcode0,ycode0,xcode1,ycode1 = 100,602,100,602
         img = self.get_grab(image_grab)
-        coord_multiplier = setting.coord_multiplier
-        # step = 3
-        coltol = 10
-        for y_code in range(ycode0-3,ycode1+3):
-            for x_code in range(xcode0-1,xcode1+1):
-                if (
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(0*coord_multiplier),y_code*coord_multiplier+cy(0*coord_multiplier))),(49,47,47),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(3*coord_multiplier),y_code*coord_multiplier+cy(0*coord_multiplier))),(49,47,47),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(6*coord_multiplier),y_code*coord_multiplier+cy(0*coord_multiplier))),(49,47,47),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(0*coord_multiplier),y_code*coord_multiplier+cy(3*coord_multiplier))),(49,47,47),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(3*coord_multiplier),y_code*coord_multiplier+cy(3*coord_multiplier))),(48,46,46),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(6*coord_multiplier),y_code*coord_multiplier+cy(3*coord_multiplier))),(42,41,41),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(0*coord_multiplier),y_code*coord_multiplier+cy(6*coord_multiplier))),(49,47,47),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(3*coord_multiplier),y_code*coord_multiplier+cy(6*coord_multiplier))),(41,40,40),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(6*coord_multiplier),y_code*coord_multiplier+cy(6*coord_multiplier))),(157,97,47),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(0*coord_multiplier),y_code*coord_multiplier+cy(9*coord_multiplier))),(47,45,45),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(3*coord_multiplier),y_code*coord_multiplier+cy(9*coord_multiplier))),(48,42,36),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(6*coord_multiplier),y_code*coord_multiplier+cy(9*coord_multiplier))),(26,54,109),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(0*coord_multiplier),y_code*coord_multiplier+cy(12*coord_multiplier))),(44,42,42),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(3*coord_multiplier),y_code*coord_multiplier+cy(12*coord_multiplier))),(172,120,69),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(6*coord_multiplier),y_code*coord_multiplier+cy(12*coord_multiplier))),(50,60,132),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(0*coord_multiplier),y_code*coord_multiplier+cy(15*coord_multiplier))),(38,37,37),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(3*coord_multiplier),y_code*coord_multiplier+cy(15*coord_multiplier))),(67,43,62),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(6*coord_multiplier),y_code*coord_multiplier+cy(15*coord_multiplier))),(78,63,120),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(0*coord_multiplier),y_code*coord_multiplier+cy(18*coord_multiplier))),(39,36,33),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(3*coord_multiplier),y_code*coord_multiplier+cy(18*coord_multiplier))),(46,37,116),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(6*coord_multiplier),y_code*coord_multiplier+cy(18*coord_multiplier))),(147,104,85),coltol)
-                ):
-                    self.last_coord = x_code,y_code
-                    return x_code,y_code
-        """
-        check is in room: 
-        @return tuple (x,y) of DISABLED Find match bt
-        @return False if no
-        """
-        # captured from 114,594 to 151,628
-        xcode0,ycode0,xcode1,ycode1 = 114,594,114,594
-        img = self.get_grab(image_grab)
-        coord_multiplier = setting.coord_multiplier
-        # step = 20
-        coltol = 10
-        for y_code in range(ycode0-3,ycode1+3):
-            for x_code in range(xcode0-1,xcode1+1):
-                if (
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(0*coord_multiplier),y_code*coord_multiplier+cy(0*coord_multiplier))),(102,102,102),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(20*coord_multiplier),y_code*coord_multiplier+cy(0*coord_multiplier))),(102,102,102),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(0*coord_multiplier),y_code*coord_multiplier+cy(20*coord_multiplier))),(48,48,48),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(20*coord_multiplier),y_code*coord_multiplier+cy(20*coord_multiplier))),(48,48,48),coltol)
-                ):
-                    self.last_coord = x_code,y_code
-                    return x_code,y_code
-        """
-        check is in room: 
-        @return tuple (x,y) of ENABLED Find match
-        @return False if no
-        """
-        # captured from 101,600 to 147,636
-        xcode0,ycode0,xcode1,ycode1 = 101,600,101,600
-        img = self.get_grab(image_grab)
-        coord_multiplier = setting.coord_multiplier
-        # step = 15
+        coord_multiplier = 2.0
+        # step = 8
         coltol = 10
         for y_code in range(ycode0-3,ycode1+3):
             for x_code in range(xcode0-1,xcode1+1):
                 if (
                     self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(0*coord_multiplier),y_code*coord_multiplier+cy(0*coord_multiplier))),(47,117,46),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(15*coord_multiplier),y_code*coord_multiplier+cy(0*coord_multiplier))),(118,164,117),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(30*coord_multiplier),y_code*coord_multiplier+cy(0*coord_multiplier))),(73,134,72),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(45*coord_multiplier),y_code*coord_multiplier+cy(0*coord_multiplier))),(47,117,46),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(0*coord_multiplier),y_code*coord_multiplier+cy(15*coord_multiplier))),(15,76,17),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(15*coord_multiplier),y_code*coord_multiplier+cy(15*coord_multiplier))),(15,76,17),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(30*coord_multiplier),y_code*coord_multiplier+cy(15*coord_multiplier))),(15,76,17),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(45*coord_multiplier),y_code*coord_multiplier+cy(15*coord_multiplier))),(13,67,15),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(0*coord_multiplier),y_code*coord_multiplier+cy(30*coord_multiplier))),(37,49,47),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(15*coord_multiplier),y_code*coord_multiplier+cy(30*coord_multiplier))),(37,49,47),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(30*coord_multiplier),y_code*coord_multiplier+cy(30*coord_multiplier))),(33,44,42),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(45*coord_multiplier),y_code*coord_multiplier+cy(30*coord_multiplier))),(212,186,88),coltol)
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(8*coord_multiplier),y_code*coord_multiplier+cy(0*coord_multiplier))),(242,246,242),coltol) and
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(16*coord_multiplier),y_code*coord_multiplier+cy(0*coord_multiplier))),(118,164,117),coltol) and
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(0*coord_multiplier),y_code*coord_multiplier+cy(8*coord_multiplier))),(13,91,12),coltol) and
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(8*coord_multiplier),y_code*coord_multiplier+cy(8*coord_multiplier))),(116,161,116),coltol) and
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(16*coord_multiplier),y_code*coord_multiplier+cy(8*coord_multiplier))),(61,124,61),coltol)
+                ):
+                    self.last_coord = x_code,y_code
+                    return x_code,y_code
+        """
+        check is in room: 
+        @return tuple (x,y) of DISABLED find match bt
+        @return False if no
+        """
+        # captured from 109,607 to 122,620
+        xcode0,ycode0,xcode1,ycode1 = 109,607,109,607
+        img = self.get_grab(image_grab)
+        coord_multiplier = 2.0
+        # step = 5
+        coltol = 10
+        for y_code in range(ycode0-2,ycode1+2):
+            for x_code in range(xcode0-1,xcode1+1):
+                if (
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(0*coord_multiplier),y_code*coord_multiplier+cy(0*coord_multiplier))),(70,70,70),coltol) and
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(5*coord_multiplier),y_code*coord_multiplier+cy(0*coord_multiplier))),(66,66,66),coltol) and
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(10*coord_multiplier),y_code*coord_multiplier+cy(0*coord_multiplier))),(76,76,76),coltol) and
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(0*coord_multiplier),y_code*coord_multiplier+cy(5*coord_multiplier))),(52,52,52),coltol) and
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(5*coord_multiplier),y_code*coord_multiplier+cy(5*coord_multiplier))),(52,52,52),coltol) and
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(10*coord_multiplier),y_code*coord_multiplier+cy(5*coord_multiplier))),(52,52,52),coltol) and
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(0*coord_multiplier),y_code*coord_multiplier+cy(10*coord_multiplier))),(47,47,47),coltol) and
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(5*coord_multiplier),y_code*coord_multiplier+cy(10*coord_multiplier))),(47,47,47),coltol) and
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(10*coord_multiplier),y_code*coord_multiplier+cy(10*coord_multiplier))),(47,47,47),coltol)
+                ):
+                    self.last_coord = x_code,y_code
+                    return x_code,y_code
+        """
+        check is in room: FInd match enable no cost gold
+        @return tuple (x,y) of ...
+        @return False if no
+        """
+        # captured from 83,604 to 118,640
+        xcode0,ycode0,xcode1,ycode1 = 83,604,83,604
+        img = self.get_grab(image_grab)
+        coord_multiplier = 2.0
+        # step = 15
+        coltol = 10
+        for y_code in range(ycode0-3,ycode1+3):
+            for x_code in range(xcode0-1,xcode1+1):
+                if (
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(0*coord_multiplier),y_code*coord_multiplier+cy(0*coord_multiplier))),(38,110,36),coltol) and
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(15*coord_multiplier),y_code*coord_multiplier+cy(0*coord_multiplier))),(38,110,36),coltol) and
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(30*coord_multiplier),y_code*coord_multiplier+cy(0*coord_multiplier))),(38,110,36),coltol) and
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(0*coord_multiplier),y_code*coord_multiplier+cy(15*coord_multiplier))),(6,80,4),coltol) and
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(15*coord_multiplier),y_code*coord_multiplier+cy(15*coord_multiplier))),(6,80,4),coltol) and
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(30*coord_multiplier),y_code*coord_multiplier+cy(15*coord_multiplier))),(6,80,4),coltol) and
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(0*coord_multiplier),y_code*coord_multiplier+cy(30*coord_multiplier))),(2,71,0),coltol) and
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(15*coord_multiplier),y_code*coord_multiplier+cy(30*coord_multiplier))),(2,71,0),coltol) and
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(30*coord_multiplier),y_code*coord_multiplier+cy(30*coord_multiplier))),(2,71,0),coltol)
                 ):
                     self.last_coord = x_code,y_code
                     return x_code,y_code
@@ -2014,33 +2001,30 @@ class RoomCheck(object):
         
         """
         check is in room: 
-        @return tuple (x,y) of Back to arena bt, return next series btton
+        @return tuple (x,y) of continue/next button july arena
         @return False if no
         """
-        # captured from 515,611 to 557,645
-        xcode0,ycode0,xcode1,ycode1 = 515,611,515,611
+        # captured from 690,614 to 724,646
+        xcode0,ycode0,xcode1,ycode1 = 690,614,690,614
         img = self.get_grab(image_grab)
-        coord_multiplier = setting.coord_multiplier
+        coord_multiplier = 2.0
         # step = 12
-        coltol = 10
+        coltol = 15
         for y_code in range(ycode0-3,ycode1+3):
             for x_code in range(xcode0-1,xcode1+1):
                 if (
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(0*coord_multiplier),y_code*coord_multiplier+cy(0*coord_multiplier))),(37,110,36),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(12*coord_multiplier),y_code*coord_multiplier+cy(0*coord_multiplier))),(37,110,36),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(24*coord_multiplier),y_code*coord_multiplier+cy(0*coord_multiplier))),(37,110,36),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(36*coord_multiplier),y_code*coord_multiplier+cy(0*coord_multiplier))),(37,110,36),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(0*coord_multiplier),y_code*coord_multiplier+cy(12*coord_multiplier))),(255,255,255),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(12*coord_multiplier),y_code*coord_multiplier+cy(12*coord_multiplier))),(15,77,17),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(24*coord_multiplier),y_code*coord_multiplier+cy(12*coord_multiplier))),(15,77,17),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(36*coord_multiplier),y_code*coord_multiplier+cy(12*coord_multiplier))),(255,255,255),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(0*coord_multiplier),y_code*coord_multiplier+cy(24*coord_multiplier))),(31,55,38),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(12*coord_multiplier),y_code*coord_multiplier+cy(24*coord_multiplier))),(31,55,38),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(24*coord_multiplier),y_code*coord_multiplier+cy(24*coord_multiplier))),(31,55,38),coltol) and
-                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(36*coord_multiplier),y_code*coord_multiplier+cy(24*coord_multiplier))),(31,55,38),coltol)
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(0*coord_multiplier),y_code*coord_multiplier+cy(0*coord_multiplier))),(46,113,28),coltol) and
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(12*coord_multiplier),y_code*coord_multiplier+cy(0*coord_multiplier))),(58,119,26),coltol) and
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(24*coord_multiplier),y_code*coord_multiplier+cy(0*coord_multiplier))),(74,127,24),coltol) and
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(0*coord_multiplier),y_code*coord_multiplier+cy(12*coord_multiplier))),(25,92,5),coltol) and
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(12*coord_multiplier),y_code*coord_multiplier+cy(12*coord_multiplier))),(116,154,92),coltol) and
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(24*coord_multiplier),y_code*coord_multiplier+cy(12*coord_multiplier))),(63,112,8),coltol) and
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(0*coord_multiplier),y_code*coord_multiplier+cy(24*coord_multiplier))),(16,81,1),coltol) and
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(12*coord_multiplier),y_code*coord_multiplier+cy(24*coord_multiplier))),(27,87,1),coltol) and
+                    self.is_color_similar(img.getpixel((x_code*coord_multiplier+cx(24*coord_multiplier),y_code*coord_multiplier+cy(24*coord_multiplier))),(42,96,1),coltol)
                 ):
                     self.last_coord = x_code,y_code
-                    return 753,622
+                    return x_code,y_code
         return False
         
         
