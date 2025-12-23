@@ -17,156 +17,194 @@ class McocArena(object):
         setting.printl("mode 1v1")
         return self.room_check.mcoc_find_buttonversus_1v1cinematic()
 
+    def click_last_found(self):
+        bot.click(cx(self.room_check.last_found_pos[0]), cy(self.room_check.last_found_pos[1]))
+
     def mcoc_arena(self):
         while True:
             if (self.reposition_max_wait>0):
                 self.reposition_max_wait -= 1
             
-            img = pyautogui.screenshot()
-            if (self.room_check.mcoc_is_room_home(img)):
-                setting.printl("room: home")
-                # click fight button on home
-                bot.click(248,155)
+            img = room_check.get_grab()
+            if False:pass
+
+            elif self.room_check.is_fight(img):
+                self.reset_flag()
+                setting.printl("room: FIGHTING!")
+                counter = 5
+                while counter>0:
+                    counter -= 1
+                    bot.dragTo(cx(1850),cy(870), 0.05, button="left") #medium attack
+                    # time.sleep(0.1)
+                    bot.click(cx(1100),cy(862)) #block
+                    # time.sleep(0.1)
+                    bot.click(cx(1700),cy(868)) #light
+                    bot.click(cx(1700),cy(868)) #light
+                    bot.dragTo(cx(1850),cy(870), 0.05, button="left") #medium attack
+                    bot.click(cx(1710),cy(868)) #light
+                    bot.click(cx(1710),cy(868)) #light
+                    bot.click(cx(1710),cy(868)) #light
+                    # time.sleep(0.1)
+                    bot.click(cx(1100),cy(862)) #block
+                    # time.sleep(0.1)
+                    bot.dragTo(cx(1850),cy(870), 0.05, button="left") #medium attack
+                    bot.click(cx(1700),cy(868)) #light
+                    bot.click(cx(1700),cy(868)) #light
+                    bot.click(cx(1710),cy(868)) #light
+                    bot.dragTo(cx(1850),cy(870), 0.05, button="left") #medium attack
+                    bot.click(cx(1710),cy(868)) #light
+                    bot.click(cx(1710),cy(868)) #light
+                    # time.sleep(0.1)
+                    bot.click(cx(1100),cy(1032)) #special
+                img = room_check.get_grab()
+                if self.room_check.is_fight_paused(img):
+                    setting.printl("fight paused, mode manual!")
+                    while True:
+                        img = room_check.get_grab()
+                        if self.room_check.is_fight_paused(img) or self.room_check.is_fight(img):
+                            time.sleep(1)
+                        else:
+                            setting.printl("fight done. continue bot")
+                            break
+            
+            elif self.room_check.is_fight_paused(img):
+                setting.printl("fight paused, mode manual!")
+                sampling = 0
+                while True:
+                    img = room_check.get_grab()
+                    if self.room_check.is_fight_paused(img) or self.room_check.is_fight(img):
+                        time.sleep(1)
+                    else:
+                        sampling += 1
+                        if sampling>5:
+                            setting.printl("fight done. continue bot")
+                            break
+
+
+
+
+            elif (
+                self.room_check.is_arena_between_match(img)
+                or self.room_check.is_arena_between_match_final(img)
+                or self.room_check.is_arena_between_match_over(img)
+            ):
+                self.reset_flag()
+                setting.printl("room: arena between match")
+                self.click_last_found()
+                time.sleep(1)
+            
+            elif self.room_check.is_arena_next_series(img):
+                self.reset_flag()
+                setting.printl("room: arena next series")
+                self.click_last_found()
                 time.sleep(0.5)
+            
+            elif self.room_check.is_arena_help(img):
                 self.reset_flag()
-             
-            elif (self.room_check.mcoc_is_room_fight(img)):
+                tries = 3
+                while self.room_check.is_arena_help(img) or tries>0:
+                    tries -= 1
+                    setting.printl("room: arena help")
+                    self.click_last_found()
+                    time.sleep(1.5)
+                    img = room_check.get_grab()
+
+            elif (self.room_check.is_arena_set_lineup(img)):
                 self.reset_flag()
-                setting.printl("room: home->fight")
-                setting.printl("getting versus button")
-                versus_button = self.room_check.mcoc_find_buttonversus()
+                setting.printl("room: home->fight->versus->set lineup (TODO)")
+                time.sleep(1)
+                for x in range(5):
+                    if self.room_check.is_arena_set_lineup_classpenalty(img):
+                        img = room_check.get_grab()
+                        setting.printl("room: home->fight->versus->set lineup class penalty")
+                        x,y = self.room_check.last_found_pos
+                        if y>850:
+                            target_y = cy(y-7)
+                        else:
+                            target_y = cy(y+70)
+                        bot.moveTo(cx(x-60),cy(y))
+                        bot.dragTo(cx(x-60),target_y, 0.5)
+                        time.sleep(0.5)
+                print('wis')
+                if self.room_check.is_arena_set_lineup(img):
+                    self.click_last_found()
+                    time.sleep(0.5)
+
+            elif (self.room_check.is_arena_select_opponent2(img)):
+                self.reset_flag()
+                setting.printl("room: home->fight->versus->select opponent")
+                time.sleep(1)
+                cntn = self.room_check.is_continue2(img)
+                if cntn:
+                    setting.printl("continue button found at {}".format(cntn))
+                    self.click_last_found()
+                    time.sleep(0.5)
+                else:
+                    setting.printl("continue button not found")
+            
+            elif (
+                self.room_check.is_find_match_ready(img) or
+                self.room_check.is_find_match_free(img) or
+                self.room_check.is_edit_team(img)
+            ):
+                self.reset_flag()
+                setting.printl("room: home->fight->versus->findmatch select champ READY to find")
+                time.sleep(1)
+                self.click_last_found()
+
                 
-                while (versus_button==False):
-                    bot.moveTo(125,256)
-                    time.sleep(0.2)
-                    bot.dragTo(383,280)
-                    time.sleep(2)
-                    versus_button = self.room_check.mcoc_find_buttonversus()
-                    if not self.room_check.mcoc_is_room_fight():
-                        break
-                if self.room_check.mcoc_is_room_fight():
-                    setting.printl("found versusbutton")
-                    time.sleep(0.2)
-                    bot.click(versus_button)
-                    time.sleep(0.5)
-            
-            elif (self.room_check.mcoc_is_room_versus(img)):
-                self.reset_flag()
-                setting.printl("room: home->fight->versus")
-                versus_target = self.mcoc_get_buttonarenatarget()
-                while (versus_target==False):
-                    bot.moveTo(125,284)
-                    time.sleep(0.2)
-                    bot.dragTo(356,240)
-                    time.sleep(2)
-                    versus_target = self.mcoc_get_buttonarenatarget()
-                    if not self.room_check.mcoc_is_room_versus():
-                        break
-                if self.room_check.mcoc_is_room_versus():
-                    setting.printl("found target")
-                    time.sleep(0.2)
-                    bot.click(versus_target)
-                    time.sleep(0.5)
-            
-            elif (self.room_check.mcoc_is_room_versus_findmatch(img)):
+            elif (self.room_check.is_find_match(img)):
                 self.reset_flag()
                 setting.printl("room: home->fight->versus->findmatch select champ")
                 
-                time.sleep(2+random.random())
-                helpbt = self.room_check.mcoc_find_buttonversus_findmatchhelp()
-                while helpbt:
-                    time.sleep(2+random.random())
-                    bot.click(helpbt)
-                    time.sleep(2+random.random())
-                    helpbt = self.room_check.mcoc_find_buttonversus_findmatchhelp()
+                setting.printl("filtering 4* manual aja, krn setting persist")
+                time.sleep(0+random.random())
                 
-                bot.moveTo(286,225)
-                time.sleep(0.3)
-                bot.dragTo(156,154)
-                time.sleep(1)
-                findmatch_bt = self.room_check.mcoc_is_room_versus_findmatch()
-                if (findmatch_bt):
-                    bot.click(findmatch_bt)
-            
-            elif (self.room_check.mcoc_is_fighting(img)):
-                self.reset_flag()
-                setting.printl("room: FIGHTING")
-                while self.room_check.mcoc_is_fighting():
-                    for x in range(0,10):
-                        bot.click(640,326, 5)
-                        time.sleep(0.3+random.random()/4)
-                    time.sleep(random.random())
-                    bot.click(178,400, 10)
-                setting.printl("done fighting")
-                
-                while (
-                    not(self.room_check.mcoc_is_loading())
-                    and self.room_check.window_is_ready()
-                    and not(self.room_check.mcoc_is_fighting_paused())
-                ):
-                    bot.click(559,326, 50)
-                    time.sleep(random.random()/4)
-            
-            elif (self.room_check.mcoc_is_loading(img)):
-                self.reset_flag()
-                setting.printl("room: loading")
-                
-                while self.room_check.mcoc_is_loading():
+                self.click_last_found()
+                time.sleep(0.5)
+                img = room_check.get_grab()
+                if self.room_check.is_find_match_ready(img):
+                    setting.printl("room: home->fight->versus->findmatch select champ READY to find")
+                    self.click_last_found()
                     time.sleep(0.5)
-            
-            elif (self.room_check.mcoc_is_fighting_paused(img)):
+                    # return
+                else:
+                    setting.printl("adding rooster")
+                    for repeat in range(3):
+                        bot.moveTo(cx(1240),cy(840))
+                        time.sleep(0.3)
+                        bot.dragTo(cx(1088),cy(853), 0.5)
+                        time.sleep(1)
+                        img = room_check.get_grab()
+                        if self.room_check.is_find_match_ready(img):
+                            self.click_last_found()
+                            time.sleep(0.5)
+                        elif not self.room_check.is_find_match(img):
+                            break
+
+
+
+            elif self.room_check.is_continue2(img):
                 self.reset_flag()
-                setting.printl("room: FIGHTING paused")
-                resumebt = self.room_check.mcoc_is_fighting_paused()
-                if resumebt:
-                    bot.click(resumebt)
-                    time.sleep(0.3)
+                setting.printl(f"continue button found. clicking")
+                self.click_last_found()
+                time.sleep(0.5)
             
-            elif (self.room_check.mcoc_is_fighting_recovered(img)):
+            elif self.room_check.is_arena_popup_close(img):
                 self.reset_flag()
-                setting.printl("room: FIGHTING recovered")
-                resumebt = self.room_check.mcoc_is_fighting_recovered()
-                if resumebt:
-                    bot.click(resumebt)
-                    time.sleep(0.3)
-            
-            
-            elif (self.room_check.mcoc_is_popup(img)):
-                self.reset_flag()
-                setting.printl("room: there's popup")
-                time.sleep(1)
-                popupbt = self.room_check.mcoc_is_popup()
-                bot.click(popupbt)
-            
-            elif (self.room_check.mcoc_is_session_offline(img)):
-                self.reset_flag()
-                setting.printl("room: lost connection")
-                bot.click(cx(396),cy(305))
-                time.sleep(3)
-            
-            elif (self.room_check.vysor_is_ads(img)):
-                self.reset_flag()
-                setting.printl("room: vysor ads")
-                bot.click(self.room_check.vysor_is_ads())
+                setting.printl("room: arena popup close")
+                self.click_last_found()
+                time.sleep(0.5)
             
             else:
-                placed = self.room_check.window_reposition()
-                if placed=="onplace":
-                    self.reposition_max_wait += 2
-                    setting.printl("reposition wait: {}".format(self.reposition_max_wait))
-                    if self.reposition_max_wait>=10:
-                        
-                        homebt = self.room_check.vysor_find_buttonhome()
-                        if homebt!=None:
-                            bot.click(homebt)
-                            time.sleep(1)
-                            bot.click(homebt)
-                            time.sleep(0.5)
-                            bot.click(298,149)
-                            time.sleep(3)
-                            self.reposition_max_wait = 0
+                print("warning: window reposition manual aja. width960 posisi kanan bawah nempel, resolusi monitor 1920x1080")
+                # placed = self.room_check.window_reposition()
+                # setting.printl(f"window position: {placed}")
                 time.sleep(0.3)
             # ~ time.sleep(2)
+        
+
+            
             
             
             

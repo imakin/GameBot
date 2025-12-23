@@ -1,0 +1,1 @@
+resolusi 960*
