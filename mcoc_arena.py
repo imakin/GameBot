@@ -39,20 +39,26 @@ class McocArena(object):
                     bot.click(cx(1100),cy(862)) #block
                     # time.sleep(0.1)
                     bot.click(cx(1700),cy(868)) #light
+                    bot.click(cx(1100),cy(862)) #block
                     bot.click(cx(1700),cy(868)) #light
                     bot.dragTo(cx(1850),cy(870), 0.05, button="left") #medium attack
                     bot.click(cx(1710),cy(868)) #light
+                    bot.click(cx(1100),cy(862)) #block
                     bot.click(cx(1710),cy(868)) #light
+                    bot.click(cx(1100),cy(862)) #block
                     bot.click(cx(1710),cy(868)) #light
                     # time.sleep(0.1)
                     bot.click(cx(1100),cy(862)) #block
                     # time.sleep(0.1)
                     bot.dragTo(cx(1850),cy(870), 0.05, button="left") #medium attack
                     bot.click(cx(1700),cy(868)) #light
+                    bot.click(cx(1100),cy(862)) #block
                     bot.click(cx(1700),cy(868)) #light
+                    bot.click(cx(1100),cy(862)) #block
                     bot.click(cx(1710),cy(868)) #light
                     bot.dragTo(cx(1850),cy(870), 0.05, button="left") #medium attack
                     bot.click(cx(1710),cy(868)) #light
+                    bot.click(cx(1100),cy(862)) #block
                     bot.click(cx(1710),cy(868)) #light
                     # time.sleep(0.1)
                     bot.click(cx(1100),cy(1032)) #special
