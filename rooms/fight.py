@@ -19,7 +19,7 @@ class fight():
         # captured from 1425,659 to 1458,683
         img = self.get_grab(image_grab)
         step = 2
-        coltol = 50
+        coltol = 60
         for y_code in range(656,662):
             for x_code in range(1424,1426):
                 if (
@@ -32,18 +32,6 @@ class fight():
                     self.is_color_similar(img.getpixel((x_code+cx(6),y_code+cy(10))),(11,95,10),coltol) and
                     self.is_color_similar(img.getpixel((x_code+cx(10),y_code+cy(10))),(151,195,144),coltol) and
                     self.is_color_similar(img.getpixel((x_code+cx(14),y_code+cy(10))),(23,86,17),coltol) and
-                    self.is_color_similar(img.getpixel((x_code+cx(16),y_code+cy(10))),(61,122,61),coltol) and
-                    self.is_color_similar(img.getpixel((x_code+cx(18),y_code+cy(10))),(149,188,150),coltol) and
-                    self.is_color_similar(img.getpixel((x_code+cx(20),y_code+cy(10))),(60,120,59),coltol) and
-                    self.is_color_similar(img.getpixel((x_code+cx(22),y_code+cy(10))),(17,90,13),coltol) and
-                    self.is_color_similar(img.getpixel((x_code+cx(26),y_code+cy(10))),(7,76,6),coltol) and
-                    self.is_color_similar(img.getpixel((x_code+cx(28),y_code+cy(10))),(10,36,7),coltol) and
-                    self.is_color_similar(img.getpixel((x_code+cx(0),y_code+cy(12))),(16,30,20),coltol) and
-                    self.is_color_similar(img.getpixel((x_code+cx(2),y_code+cy(12))),(12,63,7),coltol) and
-                    self.is_color_similar(img.getpixel((x_code+cx(4),y_code+cy(12))),(12,82,4),coltol) and
-                    self.is_color_similar(img.getpixel((x_code+cx(14),y_code+cy(14))),(18,87,14),coltol) and
-                    self.is_color_similar(img.getpixel((x_code+cx(16),y_code+cy(14))),(59,119,56),coltol) and
-                    self.is_color_similar(img.getpixel((x_code+cx(18),y_code+cy(14))),(151,189,150),coltol) and
                     self.is_color_similar(img.getpixel((x_code+cx(20),y_code+cy(14))),(60,123,57),coltol) and
                     self.is_color_similar(img.getpixel((x_code+cx(22),y_code+cy(14))),(9,90,4),coltol) and
                     self.is_color_similar(img.getpixel((x_code+cx(30),y_code+cy(14))),(30,34,29),coltol) and
