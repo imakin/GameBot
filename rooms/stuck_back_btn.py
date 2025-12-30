@@ -19,7 +19,7 @@ class stuck_back_btn():
         # captured from 1004,652 to 1041,683
         img = self.get_grab(image_grab)
         step = 12
-        coltol = 10
+        coltol = 20
         for y_code in range(649,655):
             for x_code in range(1003,1005):
                 if (

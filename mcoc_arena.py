@@ -202,6 +202,12 @@ class McocArena(object):
                 self.click_last_found()
                 time.sleep(0.5)
             
+            elif self.room_check.is_stuck_back_btn(img):
+                self.reset_flag()
+                setting.printl("room: stuck back btn detected, clicking it")
+                self.click_last_found()
+                time.sleep(1)
+            
             else:
                 print("warning: window reposition manual aja. width960 posisi kanan bawah nempel, resolusi monitor 1920x1080")
                 # placed = self.room_check.window_reposition()
