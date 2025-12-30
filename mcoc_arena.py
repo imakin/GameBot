@@ -202,7 +202,7 @@ class McocArena(object):
                 self.click_last_found()
                 time.sleep(0.5)
             
-            elif self.room_check.is_stuck_back_btn(img):
+            elif self.room_check.is_stuck_back_btn(img) and  self.room_check.is_stuck_back_btn2(img):
                 self.reset_flag()
                 setting.printl("room: stuck back btn detected, clicking it")
                 self.click_last_found()
